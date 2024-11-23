@@ -107,6 +107,16 @@ This table tracks employee leave records, including leave type, start and end da
 ### **Employee Demographics & Department Overview**
 
 - **Total Number of Employees in Each Department**: This query gives the count of employees in each department, which is useful for understanding the size of each department.
+- ```sql
+SELECT 
+    department_name,
+    COUNT(emp_id) AS 'Total Employee Cnt per Department'
+FROM
+    employees
+        INNER JOIN
+    departments ON employees.department_id = departments.dep_id
+GROUP BY department_name;
+```
   
 - **Department with the Most Employees**: This query identifies the department with the highest number of employees.
 
