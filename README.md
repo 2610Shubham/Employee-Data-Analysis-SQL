@@ -229,17 +229,77 @@ ORDER BY Total_salary DESC;
 
 ### **Employee Performance & Engagement**
 
-- **Employees with a Performance Score of 5**: This query lists employees who have received a top performance score.
+- **9. Employees with a Performance Score of 5**: This query lists employees who have received a top performance score.
+```sql
+SELECT 
+    e.emp_id, e.first_name, e.last_name, ep.Performance_Score
+FROM
+    employees e
+        JOIN
+    employee_Performance ep ON e.emp_id = ep.employee_ID
+WHERE
+    ep.Performance_Score = 5;
+```
 
-- **Average Performance Score by Department**: This query calculates the average performance score for each department.
+- **10. Average Performance Score by Department**: This query calculates the average performance score for each department.
+```sql
+SELECT 
+    d.department_name,
+    ROUND(AVG(ep.performance_score), 1) AS avg_performance_score
+FROM
+    departments d
+        INNER JOIN
+    employees e ON d.dep_id = e.department_id
+        INNER JOIN
+    employee_performance ep ON e.emp_id = ep.employee_id
+GROUP BY d.department_name
+ORDER BY avg_performance_score DESC;
+```
 
-- **Employees with the Most Leaves Taken**: This query identifies the employee with the most leave days.
+- **11. Employees with the Most Leaves Taken**: This query identifies the employee with the most leave days.
+```sql
+SELECT 
+    e.emp_id,
+    e.first_name,
+    e.last_name,
+    COUNT(el.leave_id) AS Total_Leaves
+FROM
+    employees e
+        INNER JOIN
+    employee_leave el ON e.emp_id = el.employee_id
+GROUP BY e.emp_id , e.first_name , e.last_name
+ORDER BY Total_Leaves DESC
+LIMIT 1;
+```
 
-- **Employees with No Leaves Taken**: This query lists employees who have not taken any leaves.
+- **12. Employees with No Leaves Taken**: This query lists employees who have not taken any leaves.
+```sql
+SELECT 
+    e.emp_id, e.first_name, e.last_name
+FROM
+    employees e
+        LEFT JOIN
+    employee_leave el ON e.emp_id = el.employee_id
+WHERE
+    el.employee_id IS NULL;
+```
 
 ### **Employee Management**
 
-- **List of Employees with Their Manager's Name**: This query provides a list of employees along with their manager's name, which is helpful for organizational structure analysis.
-
+- **13. List of Employees with Their Manager's Name**: This query provides a list of employees along with their manager's name, which is helpful for organizational structure analysis.
+```sql
+SELECT 
+    e.emp_id,
+    e.first_name AS employee_first_name,
+    e.last_name AS employee_last_name,
+    m.first_name AS manager_first_name,
+    m.last_name AS manager_last_name
+FROM
+    departments d
+        INNER JOIN
+    employees e ON d.dep_id = e.department_id
+        LEFT JOIN
+    employees m ON d.manager_id = m.emp_id;
+```
 ---
 
