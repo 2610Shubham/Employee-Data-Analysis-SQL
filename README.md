@@ -6,3 +6,15 @@ This project performs an in-depth analysis of employee data to derive insights r
 ## **Schema Description**
 
 The database schema consists of several tables that store detailed information about employees, departments, performance scores, salaries, and leaves. Below are the key tables:
+
+### **1. `departments` Table**
+
+This table holds the department information, including the department's ID, name, manager, and location.
+
+| Column Name      | Data Type     | Description                                             |
+|------------------|---------------|---------------------------------------------------------|
+| `dep_id`         | INT           | Primary Key: Unique identifier for each department.    |
+| `department_name`| VARCHAR(100)  | Name of the department.                                |
+| `manager_id`     | INT           | Foreign Key: References the `emp_id` from employees table, identifying the department manager. |
+| `location`       | VARCHAR(100)  | Location of the department.                            |
+
