@@ -107,7 +107,7 @@ This table tracks employee leave records, including leave type, start and end da
 ### **Employee Demographics & Department Overview**
 
 - **Total Number of Employees in Each Department**: This query gives the count of employees in each department, which is useful for understanding the size of each department.
-- ```sql
+```sql
 SELECT 
     department_name,
     COUNT(emp_id) AS 'Total Employee Cnt per Department'
