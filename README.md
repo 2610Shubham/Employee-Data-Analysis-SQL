@@ -106,7 +106,7 @@ This table tracks employee leave records, including leave type, start and end da
 
 ### **Employee Demographics & Department Overview**
 
-- **Total Number of Employees in Each Department**: This query gives the count of employees in each department, which is useful for understanding the size of each department.
+- **1. Total Number of Employees in Each Department**: This query gives the count of employees in each department, which is useful for understanding the size of each department.
 ```sql
 SELECT 
     department_name,
@@ -118,21 +118,114 @@ FROM
 GROUP BY department_name;
 ```
   
-- **Department with the Most Employees**: This query identifies the department with the highest number of employees.
+- **2. Department with the Most Employees**: This query identifies the department with the highest number of employees.
+```sql
+SELECT 
+    d.department_name, COUNT(e.emp_id) AS Employees_cnt
+FROM
+    departments d
+        INNER JOIN
+    employees e ON d.dep_id = e.department_id
+GROUP BY department_name
+ORDER BY Employees_cnt DESC
+LIMIT 1;
+```
 
-- **Employees Who Have Worked for More Than 5 Years**: This query returns employees who have been with the company for more than five years.
+- **3. Employees Who Have Worked for More Than 5 Years**: This query returns employees who have been with the company for more than five years.
+```sql
+SELECT 
+    emp_id,
+    first_name,
+    last_name,
+    joining_date,
+    ROUND(DATEDIFF(CURDATE(), joining_date) / 365,
+            0) AS Years_Of_Service
+FROM
+    employees
+WHERE
+    DATEDIFF(CURDATE(), JOINING_DATE) / 365 > 5
+ORDER BY Years_Of_Service DESC;
+```
 
-- **Department with the Highest Average Performance Score**: This query identifies the department with the best overall performance scores.
+- **4. Department with the Highest Average Performance Score**: This query identifies the department with the best overall performance scores.
+```sql
+SELECT 
+    d.department_name,
+    ROUND(AVG(ep.performance_score), 1) AS Avg_Performance
+FROM
+    departments d
+        INNER JOIN
+    employees e ON d.dep_id = e.department_id
+        INNER JOIN
+    employee_performance ep ON e.emp_id = ep.employee_id
+GROUP BY d.department_name
+ORDER BY Avg_Performance DESC
+LIMIT 1;
+```
+
 
 ### **Salary & Compensation**
 
-- **Average Salary by Department**: This query calculates the average salary in each department.
+- **5.Average Salary by Department**: This query calculates the average salary in each department.
+```sql
+SELECT 
+    department_name, ROUND(AVG(salary), 2) AS 'Avg Salary'
+FROM
+    departments
+        INNER JOIN
+    employees ON employees.department_id = departments.dep_id
+GROUP BY department_name
+ORDER BY department_name;
+```
 
-- **Highest and Lowest Salary in Each Department**: This query provides the highest and lowest salaries in each department, helping identify salary disparities.
 
-- **Employees with Salary Greater than the Department Average**: This query finds employees earning more than the average salary in their department.
+- **6. Highest and Lowest Salary in Each Department**: This query provides the highest and lowest salaries in each department, helping identify salary disparities.
+```sql
+SELECT 
+    department_name,
+    MAX(salary) AS 'Highest Salary',
+    MIN(salary) AS 'Lowest Salary'
+FROM
+    employees
+        INNER JOIN
+    departments ON employees.department_id = departments.dep_id
+GROUP BY department_name;
+```
 
-- **Total Salary Expenditure by Department**: This query calculates the total salary expenditure for each department, useful for budget planning and analysis.
+
+- **7. Employees with Salary Greater than the Department Average**: This query finds employees earning more than the average salary in their department.
+```sql
+SELECT 
+    e.emp_id,
+    e.first_name,
+    e.last_name,
+    e.salary,
+    d.department_name
+FROM
+    employees e
+        INNER JOIN
+    departments d ON e.department_id = d.dep_id
+WHERE
+    e.salary > (SELECT 
+            AVG(salary)
+        FROM
+            employees
+        WHERE
+            e.department_id = d.dep_id
+            );
+```
+
+- **8. Total Salary Expenditure by Department**: This query calculates the total salary expenditure for each department, useful for budget planning and analysis.
+```sql
+SELECT 
+    d.department_name, SUM(e.salary) AS Total_salary
+FROM
+    departments d
+        INNER JOIN
+    employees e ON d.dep_id = e.department_id
+GROUP BY d.department_name
+ORDER BY Total_salary DESC;
+```
 
 ### **Employee Performance & Engagement**
 
