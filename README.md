@@ -100,3 +100,43 @@ This table tracks employee leave records, including leave type, start and end da
 - **Relationship**: The `employee_id` in the `employee_leave` table is a foreign key referencing `emp_id` in the `employees` table.
 
 ---
+
+
+## **Queries & Analysis**
+
+### **Employee Demographics & Department Overview**
+
+- **Total Number of Employees in Each Department**: This query gives the count of employees in each department, which is useful for understanding the size of each department.
+  
+- **Department with the Most Employees**: This query identifies the department with the highest number of employees.
+
+- **Employees Who Have Worked for More Than 5 Years**: This query returns employees who have been with the company for more than five years.
+
+- **Department with the Highest Average Performance Score**: This query identifies the department with the best overall performance scores.
+
+### **Salary & Compensation**
+
+- **Average Salary by Department**: This query calculates the average salary in each department.
+
+- **Highest and Lowest Salary in Each Department**: This query provides the highest and lowest salaries in each department, helping identify salary disparities.
+
+- **Employees with Salary Greater than the Department Average**: This query finds employees earning more than the average salary in their department.
+
+- **Total Salary Expenditure by Department**: This query calculates the total salary expenditure for each department, useful for budget planning and analysis.
+
+### **Employee Performance & Engagement**
+
+- **Employees with a Performance Score of 5**: This query lists employees who have received a top performance score.
+
+- **Average Performance Score by Department**: This query calculates the average performance score for each department.
+
+- **Employees with the Most Leaves Taken**: This query identifies the employee with the most leave days.
+
+- **Employees with No Leaves Taken**: This query lists employees who have not taken any leaves.
+
+### **Employee Management**
+
+- **List of Employees with Their Manager's Name**: This query provides a list of employees along with their manager's name, which is helpful for organizational structure analysis.
+
+---
+
