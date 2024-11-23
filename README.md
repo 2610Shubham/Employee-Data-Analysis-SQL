@@ -71,4 +71,32 @@ This table tracks employee leave records, including leave type, start and end da
 | `start_date`  | DATE         | Start date of the leave.                                 |
 | `end_date`    | DATE         | End date of the leave.                                   |
 
+---
 
+## **Relationships**
+
+### **Employees ↔ Departments**
+- **One-to-Many**: Each employee is assigned to one department, but a department can have multiple employees.
+- **Relationship**: The `department_id` in the `employees` table is a foreign key referencing `dep_id` in the `departments` table.
+- **Manager Relationship**: The `manager_id` in the `departments` table is a foreign key referencing the `emp_id` in the `employees` table, indicating the manager of the department.
+
+---
+
+### **Employees ↔ Salaries**
+- **One-to-Many**: An employee can have multiple salary records over time, but each salary record belongs to one employee.
+- **Relationship**: The `employee_id` in the `salaries` table is a foreign key referencing `emp_id` in the `employees` table.
+
+---
+
+### **Employees ↔ Employee Performance**
+- **One-to-Many**: Each employee can have multiple performance reviews, but each review belongs to one employee.
+- **Relationship**: The `employee_id` in the `employee_performance` table is a foreign key referencing `emp_id` in the `employees` table.
+- **Manager Relationship**: The `manager_id` in the `employee_performance` table is a foreign key referencing the `emp_id` in the `employees` table, indicating the manager who conducted the performance review.
+
+---
+
+### **Employees ↔ Employee Leave**
+- **One-to-Many**: An employee can have multiple leave records, but each leave record belongs to one employee.
+- **Relationship**: The `employee_id` in the `employee_leave` table is a foreign key referencing `emp_id` in the `employees` table.
+
+---
