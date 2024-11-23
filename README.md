@@ -1,1 +1,1 @@
-# Employee-Data-Analysis-SQL
+# **Employee Data Analysis Project**
