@@ -18,3 +18,20 @@ This table holds the department information, including the department's ID, name
 | `manager_id`     | INT           | Foreign Key: References the `emp_id` from employees table, identifying the department manager. |
 | `location`       | VARCHAR(100)  | Location of the department.                            |
 
+### **2. `employees` Table**
+
+This table contains employee details, including personal information, department affiliation, salary, and job title.
+
+| Column Name      | Data Type     | Description                                             |
+|------------------|---------------|---------------------------------------------------------|
+| `emp_id`         | INT           | Primary Key: Unique identifier for each employee.      |
+| `first_name`     | VARCHAR(100)  | Employee's first name.                                 |
+| `last_name`      | VARCHAR(100)  | Employee's last name.                                  |
+| `date_of_birth`  | DATE          | Employee's date of birth.                              |
+| `gender`         | VARCHAR(10)   | Employee's gender.                                     |
+| `joining_date`   | DATE          | Date the employee joined the organization.             |
+| `department_id`  | INT           | Foreign Key: References the `dep_id` from the `departments` table. |
+| `salary`         | DECIMAL(10,2) | Employee's salary.                                     |
+| `job_title`      | VARCHAR(100)  | Employee's job title.                                  |
+| `location`       | VARCHAR(100)  | Employee's location.                                   |
+
